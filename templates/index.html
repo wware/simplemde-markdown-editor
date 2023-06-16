@@ -3,6 +3,11 @@
     <title>Hello from Flask</title>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+    <style>
+    .CodeMirror {
+      height: 300px;
+    }
+    </style>
     <script src="https://code.jquery.com/jquery-latest.js"></script>
     <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
     <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
@@ -13,13 +18,15 @@
         <div><pre>{{ foo }}</pre></div>
         <hr/>
         <a href="/note">Notes for this job</a>
-        <form action="{{ url_for('note') }}" method="post">
-          <textarea id="foo" name="foo" rows="8" cols="100"></textarea>
-          <input type="submit">
+        <form action="{{ url_for('hello') }}" method="post">
+          <input type="submit" value="Save">
+          <textarea id="foo" name="foo" rows="8" cols="100">{{ value }}</textarea>
         </form>
         <script>
           new SimpleMDE({
-            element: $("textarea#foo")[0], initialValue: "{{ value }}"
+            element: $("textarea#foo")[0],
+            // initialValue: "{{ value|quote_plus }}",
+            autosave: true
           });
         </script>
       </body>
